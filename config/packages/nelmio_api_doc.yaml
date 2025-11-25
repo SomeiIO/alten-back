@@ -1,0 +1,16 @@
+nelmio_api_doc:
+    documentation:
+        openapi: 3.0.0
+        info:
+            title: "Back Shop Api"
+            description: "Symfony Back Api for Shop"
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+    models:
+        use_jms: false
+        names:
+            - { alias: Product,        type: App\Entity\Product }
+            - { alias: ProductInput,   type: App\Dto\ProductInput }
+            - { alias: User,           type: App\Entity\User }
