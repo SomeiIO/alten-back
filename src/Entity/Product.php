@@ -22,7 +22,7 @@ class Product
     #[ORM\Column]
     #[OA\Property(example: 1)]
     #[Groups(['product:read'])]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 100)]
     #[Groups(['product:read'])]
@@ -34,15 +34,15 @@ class Product
     #[OA\Property(example: "T-Shirt")]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(['product:read'])]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['product:read'])]
     private ?string $image = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     #[Groups(['product:read'])]
     private ?string $category = null;
 
@@ -54,7 +54,7 @@ class Product
     #[Groups(['product:read'])]
     private ?int $quantity = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     #[Groups(['product:read'])]
     private ?string $internalReference = null;
 
@@ -104,10 +104,10 @@ class Product
     public function setDescription(string $description): static { $this->description = $description; return $this; }
 
     public function getImage(): ?string { return $this->image; }
-    public function setImage(string $image): static { $this->image = $image; return $this; }
+    public function setImage(?string $image): static { $this->image = $image; return $this; }
 
     public function getCategory(): ?string { return $this->category; }
-    public function setCategory(string $category): static { $this->category = $category; return $this; }
+    public function setCategory(?string $category): static { $this->category = $category; return $this; }
 
     public function getPrice(): ?float { return $this->price; }
     public function setPrice(float $price): static { $this->price = $price; return $this; }
@@ -116,7 +116,7 @@ class Product
     public function setQuantity(int $quantity): static { $this->quantity = $quantity; return $this; }
 
     public function getInternalReference(): ?string { return $this->internalReference; }
-    public function setInternalReference(string $internalReference): static { $this->internalReference = $internalReference; return $this; }
+    public function setInternalReference(?string $internalReference): static { $this->internalReference = $internalReference; return $this; }
 
     public function getShellId(): ?int { return $this->shellId; }
     public function setShellId(int $shellId): static { $this->shellId = $shellId; return $this; }
@@ -125,7 +125,7 @@ class Product
     public function setInventoryStatus(InventoryStatus $status): static { $this->inventoryStatus = $status; return $this; }
 
     public function getRating(): ?int { return $this->rating; }
-    public function setRating(int $rating): static { $this->rating = $rating; return $this; }
+    public function setRating(?int $rating): static { $this->rating = $rating; return $this; }
 
     public function getCreatedAt(): ?int { return $this->createdAt; }
     public function setCreatedAt(int $createdAt): static { $this->createdAt = $createdAt; return $this; }

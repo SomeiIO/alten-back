@@ -2,15 +2,27 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Helper\AuthTestTrait;
+use App\Tests\Helper\DatabaseTestCase;
 
-class AuthControllerTest extends WebTestCase
+class AuthControllerTest extends DatabaseTestCase
 {
+    use AuthTestTrait;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
+
+    public function testLogin(): void
+    {
+        $token = $this->loginAsUser($this->client);
+        $this->assertNotEmpty($token);
+    }
+
     public function testSignup(): void
     {
-        $client = static::createClient();
-
-        $client->request('POST', '/api/account', [], [], [
+        $this->client->request('POST', '/api/account', [], [], [
             'CONTENT_TYPE' => 'application/json'
         ], json_encode([
             'email' => 'new@user.com',
@@ -19,20 +31,5 @@ class AuthControllerTest extends WebTestCase
         ]));
 
         $this->assertResponseStatusCodeSame(201);
-    }
-
-    public function testLogin(): void
-    {
-        $client = static::createClient();
-
-        $client->request('POST', '/api/token', [], [], [
-            'CONTENT_TYPE' => 'application/json'
-        ], json_encode([
-            'email' => 'admin@admin.com',
-            'password' => 'admin'
-        ]));
-
-        $this->assertResponseIsSuccessful();
-        $this->assertArrayHasKey('token', json_decode($client->getResponse()->getContent(), true));
     }
 }

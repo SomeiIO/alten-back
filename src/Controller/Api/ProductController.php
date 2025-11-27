@@ -99,14 +99,14 @@ class ProductController extends AbstractController
         $product
             ->setCode($data['code'])
             ->setName($data['name'])
-            ->setDescription($data['description'])
-            ->setImage($data['image'])
-            ->setCategory($data['category'])
-            ->setPrice($data['price'])
-            ->setQuantity($data['quantity'])
-            ->setInternalReference($data['internalReference'])
-            ->setShellId($data['shellId'])
-            ->setRating($data['rating'])
+            ->setDescription($data['description'] ?? null)
+            ->setImage($data['image'] ?? null)
+            ->setCategory($data['category'] ?? null)
+            ->setPrice($data['price'] ?? 0)
+            ->setQuantity($data['quantity'] ?? 0)
+            ->setInternalReference($data['internalReference'] ?? null)
+            ->setShellId($data['shellId'] ?? 0)
+            ->setRating($data['rating'] ?? 0)
             ->setInventoryStatus(InventoryStatus::from($data['inventoryStatus']));
 
         $em->persist($product);
@@ -139,24 +139,34 @@ class ProductController extends AbstractController
     public function update(?Product $product, Request $request, EntityManagerInterface $em): JsonResponse
     {
         $this->denyAccessUnlessGranted(ProductVoter::EDIT, $product);
+
         if (!$product) {
             return $this->json(['error' => 'Not found'], 404);
         }
 
         $data = json_decode($request->getContent(), true);
 
-        $product
-            ->setCode($data['code'])
-            ->setName($data['name'])
-            ->setDescription($data['description'])
-            ->setImage($data['image'])
-            ->setCategory($data['category'])
-            ->setPrice($data['price'])
-            ->setQuantity($data['quantity'])
-            ->setInternalReference($data['internalReference'])
-            ->setShellId($data['shellId'])
-            ->setRating($data['rating'])
-            ->setInventoryStatus(InventoryStatus::from($data['inventoryStatus']));
+        $update = function (string $field, callable $setter) use ($data) {
+            if (array_key_exists($field, $data) && $data[$field] !== null) {
+                $setter($data[$field]);
+            }
+        };
+
+        $update('code', fn($v) => $product->setCode($v));
+        $update('name', fn($v) => $product->setName($v));
+        $update('description', fn($v) => $product->setDescription($v));
+        $update('image', fn($v) => $product->setImage($v));
+        $update('category', fn($v) => $product->setCategory($v));
+        $update('price', fn($v) => $product->setPrice($v));
+        $update('quantity', fn($v) => $product->setQuantity($v));
+        $update('internalReference', fn($v) => $product->setInternalReference($v));
+        $update('shellId', fn($v) => $product->setShellId($v));
+        $update('rating', fn($v) => $product->setRating($v));
+
+        // Enum special case
+        if (array_key_exists('inventoryStatus', $data) && $data['inventoryStatus'] !== null) {
+            $product->setInventoryStatus(InventoryStatus::from($data['inventoryStatus']));
+        }
 
         $em->flush();
 

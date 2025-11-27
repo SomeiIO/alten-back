@@ -9,15 +9,15 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^3.7",
-        "doctrine/orm": "^3.5",
-        "lexik/jwt-authentication-bundle": "*",
-        "nelmio/api-doc-bundle": "^5.8",
-        "phpdocumentor/reflection-docblock": "^5.6",
+        "doctrine/orm": "^3.5.7",
+        "lexik/jwt-authentication-bundle": ">=3.1.1",
+        "nelmio/api-doc-bundle": "^5.8.1",
+        "phpdocumentor/reflection-docblock": "^5.6.4",
         "phpstan/phpdoc-parser": "^2.3",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
-        "symfony/flex": "^2",
+        "symfony/flex": "^2.10",
         "symfony/framework-bundle": "7.3.*",
         "symfony/property-access": "7.3.*",
         "symfony/property-info": "7.3.*",
@@ -26,15 +26,15 @@
         "symfony/twig-bundle": "7.3.*",
         "symfony/validator": "7.3.*",
         "symfony/yaml": "7.3.*",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/extra-bundle": "^2.12|^3.22.1",
+        "twig/twig": "^2.12|^3.22"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.3",
-        "phpunit/phpunit": "^12.4",
+        "phpunit/phpunit": "^12.4.4",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
-        "symfony/maker-bundle": "^1.64"
+        "symfony/maker-bundle": "^1.65"
     },
     "config": {
         "allow-plugins": {
