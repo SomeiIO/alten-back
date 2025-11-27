@@ -83,6 +83,12 @@ Accessible via :
 http://localhost/api/doc
 ```
 
+OU
+
+```
+http://127.0.0.1:8000/api/doc
+```
+
 Toutes les routes annotées avec `#[OA\...]` sont automatiquement affichées  
 dans une interface Swagger moderne.
 
