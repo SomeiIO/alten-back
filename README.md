@@ -135,7 +135,7 @@ tests/
 
 ---
 
-## Pré - Requis
+## 🏁 Pré - Requis
 
 - PHP 8.5 installé avec les extensions suivantes :
 
@@ -178,7 +178,12 @@ php bin/console lexik:jwt:generate-keypair
 ```sh
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load --no-interaction
 ```
+La derniere ligne ajoute des données directement dans la base SQLite   
+un admin, des produits et un utilisateur avec un produit dans son panier   
+
+*Voir le fichier dans src\DataFixtures\AppFixtures.php*
 
 ### 5️⃣ Lancer le serveur
 

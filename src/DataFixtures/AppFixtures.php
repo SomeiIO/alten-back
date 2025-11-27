@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-         // ----------------------------
+        // ----------------------------
         // ADMIN USER
         // ----------------------------
         $admin = new User();
