@@ -5,9 +5,14 @@ namespace App\Entity;
 use App\Entity\Product;
 use App\Repository\ShoppingBagRepository;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Attributes as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ShoppingBagRepository::class)]
+#[OA\Schema(
+    schema: 'ShoppingBag',
+    description: "A shop ShoppingBag"
+)]
 class ShoppingBag
 {
     #[ORM\Id]

@@ -63,4 +63,15 @@ abstract class DatabaseTestCase extends WebTestCase
 
         $this->em->flush();
     }
+
+    protected function getUserFromEmail(string $email): User
+    {
+        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
+
+        if (!$user) {
+            throw new \RuntimeException("Test user not found: $email");
+        }
+
+        return $user;
+    }
 }

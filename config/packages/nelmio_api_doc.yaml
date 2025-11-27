@@ -13,4 +13,5 @@ nelmio_api_doc:
         names:
             - { alias: Product,        type: App\Entity\Product }
             - { alias: ProductInput,   type: App\Dto\ProductInput }
+            - { alias: ShoppingBag,    type: App\Entity\ShoppingBag }
             - { alias: User,           type: App\Entity\User }
